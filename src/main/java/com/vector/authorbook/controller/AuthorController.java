@@ -1,28 +1,26 @@
 package com.vector.authorbook.controller;
 
 import com.vector.authorbook.entity.Author;
-import com.vector.authorbook.repository.AuthorRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.vector.authorbook.service.AuthorService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/authors")
+@RequiredArgsConstructor
 public class AuthorController {
 
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
-    @Autowired
-    AuthorRepository authorRepository;
+
+    private final AuthorService authorService;
 
     @GetMapping
     public String authorPage(ModelMap modelMap) {
-        List<Author> all = authorRepository.findAll();
+        List<Author> all = authorService.findAll();
         modelMap.put("authors", all);
         return "author/authors";
     }
@@ -34,21 +32,20 @@ public class AuthorController {
 
     @PostMapping("/add")
     public String addAuthor(@ModelAttribute Author author) {
-        authorRepository.save(author);
+        authorService.save(author);
         return "redirect:/authors";
     }
 
     @GetMapping("/delete")
     public String deleteAuthor(@RequestParam("id") int id) {
-        authorRepository.deleteById(id);
+        authorService.deleteById(id);
         return "redirect:/authors";
     }
 
     @GetMapping("/edit")
     public String editAuthorPage(@RequestParam("id") int id, ModelMap modelMap) {
-        Optional<Author> authorOptional = authorRepository.findById(id);
-        if (authorOptional.isPresent()) {
-            Author author = authorOptional.get();
+        Author author = authorService.findById(id);
+        if (author != null) {
             modelMap.put("author", author);
             return "author/editAuthor";
         }
@@ -57,7 +54,7 @@ public class AuthorController {
 
     @PostMapping("/edit")
     public String editAuthor(@ModelAttribute Author author) {
-        authorRepository.save(author);
+        authorService.save(author);
         return "redirect:/authors";
     }
 }
