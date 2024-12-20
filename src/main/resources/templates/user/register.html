@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Register</title>
+</head>
+<body>
+Registration
+
+<form action="/users/register" method="post" >
+    Name: <input type="text" name="name"/> <br>
+    Surname: <input type="text" name="surname"/> <br>
+    Email: <input type="email" name="email"/> <br>
+    Password: <input type="password" name="password"/> <br>
+    User Type: <select name="userType">
+    <option value="USER">USER</option>
+    <option value="ADMIN">ADMIN</option>
+</select><br>
+    <input type="submit" value="register">
+</form>
+</body>
+</html>

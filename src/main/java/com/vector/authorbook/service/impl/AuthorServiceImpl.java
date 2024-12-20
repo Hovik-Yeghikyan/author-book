@@ -4,15 +4,18 @@ import com.vector.authorbook.entity.Author;
 import com.vector.authorbook.repository.AuthorRepository;
 import com.vector.authorbook.service.AuthorService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 @RequiredArgsConstructor
+@Primary
 public class AuthorServiceImpl implements AuthorService {
 
     private final AuthorRepository authorRepository;
+
 
     @Override
     public List<Author> findAll() {

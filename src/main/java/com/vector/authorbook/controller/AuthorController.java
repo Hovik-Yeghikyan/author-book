@@ -17,6 +17,9 @@ public class AuthorController {
 
 
     private final AuthorService authorService;
+    //    private final List<AuthorService> authorServices;
+
+//    private final Map<String, AuthorService> authorServiceMap;
 
     @GetMapping
     public String authorPage(ModelMap modelMap) {
