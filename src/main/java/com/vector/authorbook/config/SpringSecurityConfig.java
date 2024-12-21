@@ -42,6 +42,7 @@ public class SpringSecurityConfig {
                 .authorizeHttpRequests()
                 .requestMatchers(HttpMethod.GET,"/authors/**").hasAnyAuthority("USER", "ADMIN")
                 .requestMatchers(HttpMethod.GET,"/books/**").hasAnyAuthority( "ADMIN")
+                .requestMatchers(HttpMethod.GET,"/getImage").hasAnyAuthority( "ADMIN")
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

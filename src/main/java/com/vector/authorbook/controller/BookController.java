@@ -2,19 +2,15 @@ package com.vector.authorbook.controller;
 
 import com.vector.authorbook.entity.Author;
 import com.vector.authorbook.entity.Book;
-import com.vector.authorbook.repository.AuthorRepository;
-import com.vector.authorbook.repository.BookRepository;
 import com.vector.authorbook.service.AuthorService;
 import com.vector.authorbook.service.BookService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.List;
 
 @Controller
