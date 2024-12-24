@@ -6,10 +6,12 @@
     <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
-<div th:if="${user!= null}">Hello <span th:text="${user.name}"></span><a href="/logout">Logout</a></div> <br>
-<div th:if="${user== null}">Welcome guest</div>
+<div th:if="${currentUser!= null}">Hello <span th:text="${currentUser.name}"></span><a href="/logout">Logout</a></div> <br>
+<div th:if="${currentUser== null}">Welcome guest <a href="/loginPage">Login</a> </div>
 <a href="/books">Books</a><br>
 <a href="/authors">Authors</a>
 <a href="/users/register">Register</a>
+
+<th:block th:include="fragment/my-fragments::footer"></th:block>
 </body>
 </html>

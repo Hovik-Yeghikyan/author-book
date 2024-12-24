@@ -1,5 +1,6 @@
 package com.vector.authorbook.controller;
 
+import com.vector.authorbook.entity.UserType;
 import com.vector.authorbook.service.security.CurrentUser;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -22,11 +23,26 @@ public class MainController {
     private String uploadPath;
 
     @GetMapping("/")
-    public String mainPage(ModelMap modelMap, @AuthenticationPrincipal CurrentUser currentUser) {
-        if (currentUser != null) {
-            modelMap.put("user",currentUser.getUser());
-        }
+    public String mainPage(){
         return "index";
+    }
+
+    @GetMapping("/loginPage")
+    public String loginPage(@AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser != null) {
+            return "redirect:/";
+        }
+        return "loginPage";
+    }
+
+    @GetMapping("/loginSuccess")
+    public String loginSuccess(@AuthenticationPrincipal CurrentUser currentUser) {
+        if (currentUser != null && currentUser.getUser() != null) {
+            if (currentUser.getUser().getUserType() == UserType.ADMIN) {
+                return "redirect:/admin";
+            }
+        }
+        return "redirect:/";
     }
 
     @GetMapping(value = "/getImage", produces = MediaType.IMAGE_JPEG_VALUE)
