@@ -5,7 +5,9 @@
     <title>Register</title>
 </head>
 <body>
-Registration
+<th:block th:include="fragment/my-fragments::language"></th:block>
+
+<span>Registration</span>
 
 <form action="/users/register" method="post" >
     Name: <input type="text" name="name"/> <br>
