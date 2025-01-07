@@ -6,6 +6,23 @@
 </head>
 <body>
 Author Page | <a href="/authors/add">Add</a>
+<br>
+Search: <form action="/authors/search" method="get">
+    <input type="text" name="keyword">
+    <input type="submit" value="search">
+</form>
+Filter:
+<form action="/authors/filter" method="get">
+    name: <input type="text" name="name">
+    surname: <input type="text" name="surname"> <br>
+    phone: <input type="text" name="phone">
+    gender: <select name="gender">
+    <option value="">-</option>
+    <option value="MALE">MALE</option>
+    <option value="FEMALE">FEMALE</option>
+</select>
+    <input type="submit" value="filter">
+</form>
 <table border="1">
     <tr>
         <th>id</th>
@@ -16,7 +33,7 @@ Author Page | <a href="/authors/add">Add</a>
         <th>gender</th>
     </tr>
 
-    <tr th:each="author :${authors}">
+    <tr th:each="author :${authors.content}">
         <td th:text="${author.id}"></td>
         <td th:text="${author.name}"></td>
         <td th:text="${author.surname}"></td>
@@ -26,7 +43,16 @@ Author Page | <a href="/authors/add">Add</a>
         <td><a th:href="@{/authors/edit(id=${author.id})}">Edit</a> | <a th:href="@{/authors/delete(id=${author.id})}">Delete</a> </td>
     </tr>
 </table>
-</body>
+
+<div th:if="${authors.totalPages > 0}" class="pagination"
+     th:each="pageNumber : ${pageNumbers}">
+    <a th:href="@{/authors(pageSize=${authors.size}, pageNumber=${pageNumber})}"
+       th:text="${pageNumber}"
+       th:class="${pageNumber==authors.number + 1} ? active"></a>
+</div>
+<br>
 
 <th:block th:include="fragment/my-fragments::footer"></th:block>
+
+</body>
 </html>
